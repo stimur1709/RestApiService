@@ -16,6 +16,7 @@ import ru.safin.restapiservice.utils.Exception;
 import ru.safin.restapiservice.utils.MeasurementValidator;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,8 +52,12 @@ public class MeasurementController {
 
     @GetMapping
     public MeasurementResponse getMeasurements() {
-        return new MeasurementResponse(measurementService.findAll().stream().map(this::convertToMeasurementDTO)
-                .collect(Collectors.toList()));
+        return new MeasurementResponse(measurementService.findAll()
+                .stream().map(this::convertToMeasurementDTO).collect(Collectors.toList()));
+    }
+
+    private MeasurementDTO convertToMeasurementDTO(Measurement measurement) {
+        return modelMapper.map(measurement, MeasurementDTO.class);
     }
 
     @GetMapping("/rainyDaysCount")
@@ -73,7 +78,5 @@ public class MeasurementController {
         return modelMapper.map(measurementDTO, Measurement.class);
     }
 
-    private MeasurementDTO convertToMeasurementDTO(Measurement measurement) {
-        return modelMapper.map(measurement, MeasurementDTO.class);
-    }
+
 }

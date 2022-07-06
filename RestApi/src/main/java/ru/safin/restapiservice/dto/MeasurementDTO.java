@@ -1,7 +1,5 @@
 package ru.safin.restapiservice.dto;
 
-import ru.safin.restapiservice.models.Sensor;
-
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -17,7 +15,7 @@ public class MeasurementDTO {
     private boolean raining;
 
     @NotNull(message = "Значение не может быть пустым")
-    private Sensor sensor;
+    private SensorDTO sensor;
 
     public double getValue() {
         return value;
@@ -35,11 +33,11 @@ public class MeasurementDTO {
         this.raining = raining;
     }
 
-    public Sensor getSensor() {
+    public SensorDTO getSensor() {
         return sensor;
     }
 
-    public void setSensor(Sensor sensor) {
+    public void setSensor(SensorDTO sensor) {
         this.sensor = sensor;
     }
 }
