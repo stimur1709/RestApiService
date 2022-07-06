@@ -9,10 +9,10 @@ ___
 
 Принимает данные от сенсора и хранит БД.
 
-POST запрос http://localhost:8080/sensors/registration. Регистрирует сенсор в системе. POST
-запрос http://localhost:8080/measurements/add. Отправляет данные измерения на сервер. GET
-запрос http://localhost:8080/measurements. Получает данные всех измерений. GET
-запрос http://localhost:8080/measurements/rainyDaysCount. Получается количество дождливых дней.
+POST запрос http://localhost:8080/sensors/registration. Регистрирует сенсор в системе.
+POST запрос http://localhost:8080/measurements/add. Отправляет данные измерения на сервер.
+GET запрос http://localhost:8080/measurements. Получает данные всех измерений.
+GET запрос http://localhost:8080/measurements/rainyDaysCount. Получается количество дождливых дней.
 
 ___
 
