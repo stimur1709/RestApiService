@@ -16,8 +16,6 @@ import ru.safin.restapiservice.utils.Exception;
 import ru.safin.restapiservice.utils.MeasurementValidator;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
