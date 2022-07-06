@@ -2,6 +2,7 @@ package ru.safin.restapiservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.safin.restapiservice.dto.MeasurementDTO;
 import ru.safin.restapiservice.models.Measurement;
 import ru.safin.restapiservice.models.Sensor;
 import ru.safin.restapiservice.repositories.MeasurementRepository;
@@ -9,6 +10,7 @@ import ru.safin.restapiservice.repositories.SensorRepository;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,5 +34,13 @@ public class MeasurementService {
         Optional<Sensor> sensor = sensorRepository.findByName(measurement.getSensor().getName());
         sensor.ifPresent(measurement::setSensor);
         measurement.setMeasurementTime(LocalDateTime.now());
+    }
+
+    public List<Measurement> findAll() {
+        return measurementRepository.findAll();
+    }
+
+    public long getRainyDaysCount() {
+        return measurementRepository.findAll().stream().filter(Measurement::isRaining).count();
     }
 }

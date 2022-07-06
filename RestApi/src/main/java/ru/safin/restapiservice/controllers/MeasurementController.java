@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.safin.restapiservice.dto.MeasurementDTO;
+import ru.safin.restapiservice.dto.MeasurementResponse;
 import ru.safin.restapiservice.models.Measurement;
 import ru.safin.restapiservice.service.MeasurementService;
 import ru.safin.restapiservice.utils.ErrorResponse;
@@ -15,6 +16,8 @@ import ru.safin.restapiservice.utils.Exception;
 import ru.safin.restapiservice.utils.MeasurementValidator;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/measurements")
@@ -46,6 +49,17 @@ public class MeasurementController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
+    @GetMapping
+    public MeasurementResponse getMeasurements() {
+        return new MeasurementResponse(measurementService.findAll().stream().map(this::convertToMeasurementDTO)
+                .collect(Collectors.toList()));
+    }
+
+    @GetMapping("/rainyDaysCount")
+    public long getRainyDaysCount() {
+        return measurementService.getRainyDaysCount();
+    }
+
     @ExceptionHandler
     private ResponseEntity<ErrorResponse> handlerException(Exception e) {
         ErrorResponse response = new ErrorResponse(
@@ -57,5 +71,9 @@ public class MeasurementController {
 
     private Measurement convertToMeasurement(MeasurementDTO measurementDTO) {
         return modelMapper.map(measurementDTO, Measurement.class);
+    }
+
+    private MeasurementDTO convertToMeasurementDTO(Measurement measurement) {
+        return modelMapper.map(measurement, MeasurementDTO.class);
     }
 }
