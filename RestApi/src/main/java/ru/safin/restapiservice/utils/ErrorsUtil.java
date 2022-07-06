@@ -17,6 +17,6 @@ public class ErrorsUtil {
                     .append(";");
         }
 
-        throw new SensorException(errorMessage.toString());
+        throw new Exception(errorMessage.toString());
     }
 }

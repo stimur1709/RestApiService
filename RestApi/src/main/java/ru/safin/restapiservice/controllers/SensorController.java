@@ -10,8 +10,8 @@ import ru.safin.restapiservice.dto.SensorDTO;
 import ru.safin.restapiservice.models.Sensor;
 import ru.safin.restapiservice.service.SensorService;
 import ru.safin.restapiservice.utils.ErrorsUtil;
-import ru.safin.restapiservice.utils.SensorErrorResponse;
-import ru.safin.restapiservice.utils.SensorException;
+import ru.safin.restapiservice.utils.ErrorResponse;
+import ru.safin.restapiservice.utils.Exception;
 import ru.safin.restapiservice.utils.SensorValidator;
 
 import javax.validation.Valid;
@@ -44,8 +44,8 @@ public class SensorController {
     }
 
     @ExceptionHandler
-    public ResponseEntity<SensorErrorResponse> handlerException(SensorException e) {
-            SensorErrorResponse response = new SensorErrorResponse(
+    private ResponseEntity<ErrorResponse> handlerException(Exception e) {
+            ErrorResponse response = new ErrorResponse(
                     e.getMessage(),
                     System.currentTimeMillis()
             );

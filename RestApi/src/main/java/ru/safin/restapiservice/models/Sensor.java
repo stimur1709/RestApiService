@@ -3,10 +3,12 @@ package ru.safin.restapiservice.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "sensor")
-public class Sensor {
+public class Sensor implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +18,9 @@ public class Sensor {
     @NotEmpty(message = "Название не может быть пустым!")
     @Size(min = 3, max = 30, message = "Название сенсора должно быть от 3 до 30 символов!")
     private String name;
+
+    @OneToMany(mappedBy = "sensor")
+    private List<Measurement> measurementList;
 
     public Sensor() {
     }
